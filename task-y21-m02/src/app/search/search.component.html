@@ -8,8 +8,10 @@
         </form>
     </mat-card-header>
 
+    <mat-progress-bar mode="indeterminate" *ngIf="isSearchLoading"></mat-progress-bar>
+
     <mat-list>
-        <mat-list-item *ngFor="let item of loadedItems" (click)="addToPlaylist(item)">
+        <mat-list-item *ngFor="let item of playlistService.searchResultsList$ | async" (click)="addToPlaylist(item)">
             {{item.title}}<br>
             {{item.artist.name}}<br>
             <img src={{item.album.cover_small}}>

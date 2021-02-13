@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SearchService, SearchResult, PlaylistItem } from '../services/search.service';
-import { mergeMap } from 'rxjs/operators';
+import { debounceTime, mergeMap } from 'rxjs/operators';
 import { PlaylistStateService } from '../services/playlist-state.service';
 
 @Component({
@@ -15,14 +15,15 @@ export class SearchComponent implements OnInit {
   public reactiveForm = new FormGroup({
     searchValue: new FormControl()
   })
-  public loadedItems: PlaylistItem[] | any;
+  public loadedItems: PlaylistItem[] | any; // pozbyć się tego? Może jeszcze się przyda potem
+  public isSearchLoading: boolean = false;
 
   private currentSearchQuery = '';
   private currentSearchIndex = 0;
 
   constructor(
     private searchService: SearchService,
-    private playlistService: PlaylistStateService
+    public playlistService: PlaylistStateService
   ) {
 
   }
@@ -38,16 +39,22 @@ export class SearchComponent implements OnInit {
       (searchVal: SearchResult) => {
         console.log('value of search', searchVal);
         const resultsArray: PlaylistItem[] = searchVal.data;
-        resultsArray.forEach((element: PlaylistItem) => {
-          this.loadedItems.push(element)
-        });
+
+        for (let sinleResult of resultsArray) {
+          this.playlistService.addToSearchResults(sinleResult);
+        }
+
+        // resultsArray.forEach((element: PlaylistItem) => {
+        //   this.loadedItems.push(element)
+        // });
       }
     )
   }
 
-  addToPlaylist(item: PlaylistItem): void{
+  addToPlaylist(item: PlaylistItem): void {
     this.playlistService.addToPlaylist(
-      { title: item.title,
+      {
+        title: item.title,
         artist: {
           name: item.artist.name,
         },
@@ -57,23 +64,31 @@ export class SearchComponent implements OnInit {
         id: item.id
       }
     );
+    this.playlistService.removeFromSearchResults(item.id);
   }
 
-  private subscribeToFormValue(){
+  private subscribeToFormValue() {
     this.reactiveForm.get('searchValue')!.valueChanges.pipe(
+      debounceTime(1000), // to prevent too many requests on fast typing input
       mergeMap(
         (formValue: string) => {
+          this.isSearchLoading = true;
           this.currentSearchIndex = 0;
           this.loadedItems = [];
+          this.playlistService.clearSearchResults();
           this.currentSearchQuery = formValue;
           return this.searchService.getData(formValue, this.currentSearchIndex);
-        })
+        }),
+        debounceTime(750), // to pretend longer responce in order to see loading feature better
     )
       .subscribe(
-        (searchVal: SearchResult) => {
-          console.log('value of search', searchVal)
-          this.loadedItems= searchVal.data;
-          console.log('this.loadedItems', this.loadedItems)
+        (searchResult: SearchResult) => {
+          console.log('value of search', searchResult)
+          this.loadedItems = searchResult.data;
+          for (let singleResult of searchResult.data) {
+            this.playlistService.addToSearchResults(singleResult);
+          }
+          this.isSearchLoading = false;
         },
         error => console.log('TU OBSŁUGA MOJEGO BŁĘDU', error)
       )

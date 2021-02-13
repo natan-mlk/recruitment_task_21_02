@@ -14,6 +14,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatListModule} from '@angular/material/list';
 import { HttpClientModule } from '@angular/common/http';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    MatListModule
+    MatListModule,
+    MatProgressBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

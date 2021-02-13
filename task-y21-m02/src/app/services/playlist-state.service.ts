@@ -8,14 +8,24 @@ import { PlaylistItem } from './search.service';
 export class PlaylistStateService {
 
   private readonly playlist: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+  private readonly searchResultsList: BehaviorSubject<any> = new BehaviorSubject<any>([]);
 
   readonly playlist$ = this.playlist.asObservable();
+  readonly searchResultsList$ = this.searchResultsList.asObservable();
 
-  get playlistItems(): any[] {
+
+  get playlistItems(): PlaylistItem[] {
     return this.playlist.getValue();
   }
-  set playlistItems(val: any[]) {
+  set playlistItems(val: PlaylistItem[]) {
     this.playlist.next(val);
+  }
+
+  get searchListItems(): PlaylistItem[] {
+    return this.searchResultsList.getValue();
+  }
+  set searchListItems(val: PlaylistItem[]) {
+    this.searchResultsList.next(val);
   }
 
 
@@ -28,6 +38,22 @@ export class PlaylistStateService {
 
   removeFromPlaylist(id: number): void {
     this.playlistItems = this.playlistItems.filter(item => item.id !== id);
+  }
+
+  addToSearchResults(sinleResult: PlaylistItem): void{
+    this.searchListItems = [
+      ...this.searchListItems,
+      sinleResult
+    ]
+    // może warto żeby od razu sortowało po tym czym sortuje domyślnie? tylko po czym to robi?
+  }
+
+  removeFromSearchResults(id: number): void {
+    this.searchListItems = this.searchListItems.filter(item => item.id !== id);
+  }
+
+  clearSearchResults(): void {
+    this.searchListItems =[];
   }
 
   constructor() { }

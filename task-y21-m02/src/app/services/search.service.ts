@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 
 
@@ -17,7 +17,7 @@ export class SearchService {
   //   withCredentials?: boolean,
   // }
 
-  options = {
+  private options = {
     headers: {
       "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
       "x-rapidapi-key": "2b8c48bfefmshdc5ae752139a51fp150905jsnd66c041066a9"
@@ -27,7 +27,8 @@ export class SearchService {
       "limit": "5" }
   };
 
-  url = 'https://deezerdevs-deezer.p.rapidapi.com/search';
+  private url = 'https://deezerdevs-deezer.p.rapidapi.com/search';
+
   constructor(private http: HttpClient) { }
 
 

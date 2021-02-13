@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'task-y21-m02';
+
+  public showPlaylist(){
+    
+  }
 }

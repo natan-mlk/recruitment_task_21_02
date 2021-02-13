@@ -1,0 +1,29 @@
+@import "styles-viariables/variables";
+
+.app-header {
+    background-color: $appHeaderColor;
+    width: 100%;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 1);
+    clip-path: inset(0px 0px -15px 0px);
+}
+
+.app-workspace {
+    display: flex;
+    flex-direction: column;
+}
+
+app-playlist {
+    display: none;
+}
+
+
+@media (min-width: $desktopBreakpoint) {
+    .app-workspace {
+    flex-direction: row;
+        
+    }
+
+    app-playlist {
+        display: block;
+    }
+}

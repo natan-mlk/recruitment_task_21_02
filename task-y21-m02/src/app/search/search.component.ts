@@ -14,8 +14,10 @@ export class SearchComponent implements OnInit {
   public reactiveForm = new FormGroup({
     searchValue: new FormControl()
   })
-
   public loadedItems: any;
+
+  private currentSearchQuery = '';
+  private currentSearchIndex = 0;
 
   constructor(
     private searchService: SearchService
@@ -24,16 +26,38 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.subscribeToFormValue();
+  }
+
+  loadMore(): void {
+    this.currentSearchIndex += 5;
+    this.searchService.getData(this.currentSearchQuery, this.currentSearchIndex).subscribe(
+      searchVal => {
+        console.log('value of search', searchVal);
+        const resultsArray = searchVal.data;
+        resultsArray.forEach((element: any) => {
+          this.loadedItems.push(element)
+        });
+      }
+    )
+  }
+
+  private subscribeToFormValue(){
     this.reactiveForm.get('searchValue')!.valueChanges.pipe(
       mergeMap(
         (formValue: string) => {
-          return this.searchService.getData(formValue);
+          this.currentSearchIndex = 0;
+          this.loadedItems = [];
+          this.currentSearchQuery = formValue;
+          return this.searchService.getData(formValue, this.currentSearchIndex);
         })
     )
       .subscribe(
         searchVal => {
           console.log('value of search', searchVal)
           this.loadedItems= searchVal.data;
+          console.log('this.loadedItems', this.loadedItems)
+
         }
       )
   }

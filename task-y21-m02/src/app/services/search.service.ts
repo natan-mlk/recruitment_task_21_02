@@ -22,9 +22,11 @@ export class SearchService {
       "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
       "x-rapidapi-key": "2b8c48bfefmshdc5ae752139a51fp150905jsnd66c041066a9"
     },
-    params: { 
+    params: {
       "q": "",
-      "limit": "5" }
+      "limit": "5",
+      "index": "0"
+    }
   };
 
   private url = 'https://deezerdevs-deezer.p.rapidapi.com/search';
@@ -32,13 +34,14 @@ export class SearchService {
   constructor(private http: HttpClient) { }
 
 
-  getData(param: string): Observable<any> {
-    this.passQueryParams(param);
+  getData(param: string, index: number): Observable<any> {
+    this.passQueryParams(param, index);
     return this.http.get(this.url, this.options);
   }
 
-  private passQueryParams(param: string) {
-    this.options.params.q = param
+  private passQueryParams(param: string, index: number) {
+    this.options.params.q = param;
+    this.options.params.index = index.toString();
   }
 
 }

@@ -3,6 +3,7 @@
 .app-header {
     background-color: $appHeaderColor;
     width: 100%;
+    height: 70px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 1);
     clip-path: inset(0px 0px -15px 0px);
 }
@@ -10,17 +11,34 @@
 .app-workspace {
     display: flex;
     flex-direction: column;
+    height: calc(100vh - 70px);
+    padding: 1.7rem 1rem 1rem;
+
+
+    &__playlist, &__search {
+        width: 100%;
+        height: 100%;
+    }
+
+
 }
 
 app-playlist {
     display: none;
 }
 
-
 @media (min-width: $desktopBreakpoint) {
     .app-workspace {
-    flex-direction: row;
-        
+        flex-direction: row;
+        // padding: 1.7rem 1rem 1rem;
+
+        &__search {
+            width: 60%;
+        }
+
+        &__playlist {
+            width: 40%;
+        }
     }
 
     app-playlist {

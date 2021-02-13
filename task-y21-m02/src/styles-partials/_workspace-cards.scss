@@ -4,5 +4,19 @@
     background-color: $workspaceCardColor;
     height: 100%;
 
-    
+    // &--playlist {
+    //     width: 30%;
+    // }
+
+    // &--search {
+    //     width: 70%;
+    // }
+}
+
+@media (min-width: $desktopBreakpoint) {
+    .workspace-card {
+        &--playlist {
+            margin-right: 20%;
+        }
+    }
 }

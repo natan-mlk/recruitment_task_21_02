@@ -3,10 +3,14 @@
 
 html,
 body {
-    height: 100%;
+    height: 100vh;
 }
 body {
     margin: 0;
     font-family: $mainFontFamily;
     background-color: $appBackgroungColor;
+}
+
+* {
+    box-sizing: border-box;
 }

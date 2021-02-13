@@ -9,7 +9,7 @@
     </mat-card-header>
 
     <mat-list>
-        <mat-list-item *ngFor="let item of loadedItems">
+        <mat-list-item *ngFor="let item of loadedItems" (click)="addToPlaylist(item)">
             {{item.title}}<br>
             {{item.artist.name}}<br>
             <img src={{item.album.cover_small}}>

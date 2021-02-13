@@ -2,6 +2,21 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 
+export interface SearchResult {
+  data: Array<PlaylistItem>,
+  next: string
+}
+
+export interface PlaylistItem {
+  id: number;
+  title: string;
+  artist: {
+    name: string;
+  };
+  album: {
+    cover_small: string
+  }
+}
 
 @Injectable({
   providedIn: 'root'
@@ -34,9 +49,9 @@ export class SearchService {
   constructor(private http: HttpClient) { }
 
 
-  getData(param: string, index: number): Observable<any> {
+  getData(param: string, index: number): Observable<SearchResult> {
     this.passQueryParams(param, index);
-    return this.http.get(this.url, this.options);
+    return this.http.get<SearchResult>(this.url, this.options);
   }
 
   private passQueryParams(param: string, index: number) {

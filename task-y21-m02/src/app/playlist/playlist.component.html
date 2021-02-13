@@ -1,3 +1,9 @@
 <mat-card class="workspace-card workspace-card--playlist">
-    SOme test
+    <mat-list>
+        <mat-list-item *ngFor="let item of playlistService.playlist$ | async" (click)="removeFromList(item.id)">
+            {{item.title}}<br>
+            {{item.artistName}}<br>
+            <img src={{item.image}}>
+        </mat-list-item>
+    </mat-list>
 </mat-card>

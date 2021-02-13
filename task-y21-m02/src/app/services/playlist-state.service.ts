@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { PlaylistItem } from './search.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,15 +19,15 @@ export class PlaylistStateService {
   }
 
 
-  addToPlaylist(playlistItem: any) {
+  addToPlaylist(playlistItem: PlaylistItem): void {
     this.playlistItems = [
       ...this.playlistItems, 
       playlistItem
     ];
   }
 
-  removeFromPlaylist(id: number) {
-    this.playlistItems = this.playlistItems.filter(todo => todo.id !== id);
+  removeFromPlaylist(id: number): void {
+    this.playlistItems = this.playlistItems.filter(item => item.id !== id);
   }
 
   constructor() { }

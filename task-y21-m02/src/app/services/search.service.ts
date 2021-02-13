@@ -23,15 +23,6 @@ export interface PlaylistItem {
 })
 export class SearchService {
 
-  // options = {
-  //   headers?: HttpHeaders | {[header: string]: string | string[]},
-  //   observe?: 'body' | 'events' | 'response',
-  //   params?: HttpParams|{[param: string]: string | string[]},
-  //   reportProgress?: boolean,
-  //   responseType?: 'arraybuffer'|'blob'|'json'|'text',
-  //   withCredentials?: boolean,
-  // }
-
   private options = {
     headers: {
       "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
@@ -53,10 +44,13 @@ export class SearchService {
     this.passQueryParams(param, index);
     return this.http.get<SearchResult>(this.url, this.options);
   }
+  // może przemapować responce????????????????
+  // return this.http.get(urlPath).pipe(map(
+  //   res => res.map(({name, currencies })=>({name, currencies})) 
+  // ));
 
   private passQueryParams(param: string, index: number) {
     this.options.params.q = param;
     this.options.params.index = index.toString();
   }
-
 }

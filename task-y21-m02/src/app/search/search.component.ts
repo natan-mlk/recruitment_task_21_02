@@ -45,11 +45,15 @@ export class SearchComponent implements OnInit {
     )
   }
 
-  addToPlaylist(item: PlaylistItem){
+  addToPlaylist(item: PlaylistItem): void{
     this.playlistService.addToPlaylist(
       { title: item.title,
-        artistName: item.artist.name,
-        image: item.album.cover_small,
+        artist: {
+          name: item.artist.name,
+        },
+        album: {
+          cover_small: item.album.cover_small
+        },
         id: item.id
       }
     );

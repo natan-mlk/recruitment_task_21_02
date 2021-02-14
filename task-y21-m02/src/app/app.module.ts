@@ -15,12 +15,17 @@ import {MatInputModule} from '@angular/material/input';
 import {MatListModule} from '@angular/material/list';
 import { HttpClientModule } from '@angular/common/http';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatButtonModule} from '@angular/material/button';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { SaveModalComponent } from './save-modal/save-modal.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     PlaylistComponent,
-    SearchComponent
+    SearchComponent,
+    SaveModalComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +39,9 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatFormFieldModule,
     MatInputModule,
     MatListModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatButtonModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

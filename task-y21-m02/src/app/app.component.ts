@@ -47,9 +47,9 @@ export class AppComponent implements OnInit {
       panelClass: 'save-dialog'
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log('The dialog was closed');
+    // });
   }
 
   ngOnDestroy(): void {

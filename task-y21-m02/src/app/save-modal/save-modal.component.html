@@ -1,12 +1,21 @@
 <form [formGroup]="savePlaylistForm">
     <mat-form-field appearance="fill">
         <mat-label>Playlist name</mat-label>
-        <input matInput formControlName="playlistName">
+        <input required matInput formControlName="name">
+        <mat-error *ngIf="name!.hasError('required')">
+            Please enter playlist name
+        </mat-error>
+        <mat-error *ngIf="name!.hasError('minlength')">
+            Min length of this field is: 3
+        </mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
         <mat-label>E-Mail</mat-label>
-        <input matInput formControlName="email">
+        <input type="email" required matInput formControlName="email">
+        <mat-error *ngIf="email!.invalid">
+            Required format name@example.com
+        </mat-error>
     </mat-form-field>
 </form>
 
-<button color="accent" mat-button (click)="savePlaylist()">Save</button>
+<button color="accent" mat-button (click)="savePlaylist()" [disabled]="!savePlaylistForm.valid">Save</button>

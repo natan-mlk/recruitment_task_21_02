@@ -71,7 +71,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   private subscribeToFormValue() {
     this.searchFormSubsc = this.searchForm.get('searchValue')!.valueChanges.pipe(
-      debounceTime(1000), // to prevent too many requests on fast typing input
+      debounceTime(750), // to prevent too many requests on fast typing input
       mergeMap(
         (formValue: string) => {
           this.isSearchLoading = true;
@@ -81,7 +81,7 @@ export class SearchComponent implements OnInit, OnDestroy {
           this.currentSearchQuery = formValue;
           return this.searchService.getData(formValue, this.currentSearchIndex);
         }),
-        debounceTime(750), // to pretend longer responce in order to see loading feature better
+        debounceTime(1000), // to pretend longer responce in order to see loading feature better
     )
       .subscribe(
         (searchResult: SearchResult) => {

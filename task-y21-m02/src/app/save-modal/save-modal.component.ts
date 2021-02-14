@@ -50,7 +50,7 @@ export class SaveModalComponent implements OnInit {
           const exportedFileDataJson = JSON.stringify(exportedFileData);
           const blob = new Blob([exportedFileDataJson], { type: "text/plain;charset=utf-8" });
           saveAs(blob, exportedFileData.name + ".txt");
-          this.dialogRef.close();
+          this.dialogRef.close(true);
         }
       )
   }

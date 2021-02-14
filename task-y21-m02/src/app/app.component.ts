@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { SaveModalComponent } from './save-modal/save-modal.component';
 import { PlaylistStateService } from './services/playlist-state.service';
@@ -16,7 +17,8 @@ export class AppComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private playlistStateService: PlaylistStateService
+    private playlistStateService: PlaylistStateService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -47,9 +49,11 @@ export class AppComponent implements OnInit {
       panelClass: 'save-dialog'
     });
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log('The dialog was closed');
-    // });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.snackBar.open('Successfully saved playlist', undefined, {duration: 3000})
+      }
+    });
   }
 
   ngOnDestroy(): void {

@@ -1,18 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SearchService, SearchResult, PlaylistItem } from '../services/search.service';
 import { debounceTime, mergeMap } from 'rxjs/operators';
 import { PlaylistStateService } from '../services/playlist-state.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnDestroy {
 
 
-  public reactiveForm = new FormGroup({
+  public searchForm = new FormGroup({
     searchValue: new FormControl()
   })
   public loadedItems: PlaylistItem[] | any; // pozbyć się tego? Może jeszcze się przyda potem
@@ -20,6 +21,7 @@ export class SearchComponent implements OnInit {
 
   private currentSearchQuery = '';
   private currentSearchIndex = 0;
+  private searchFormSubsc: Subscription = Subscription.EMPTY;
 
   constructor(
     private searchService: SearchService,
@@ -68,7 +70,7 @@ export class SearchComponent implements OnInit {
   }
 
   private subscribeToFormValue() {
-    this.reactiveForm.get('searchValue')!.valueChanges.pipe(
+    this.searchFormSubsc = this.searchForm.get('searchValue')!.valueChanges.pipe(
       debounceTime(1000), // to prevent too many requests on fast typing input
       mergeMap(
         (formValue: string) => {
@@ -94,5 +96,8 @@ export class SearchComponent implements OnInit {
       )
   }
 
+  ngOnDestroy(): void{
+    this.searchFormSubsc.unsubscribe();
+  }
 
 }

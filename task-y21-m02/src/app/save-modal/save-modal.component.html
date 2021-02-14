@@ -1,4 +1,12 @@
-<p>save-modal works!</p>
-<h1>{{data.playlist$ | async}}</h1>
+<form [formGroup]="savePlaylistForm">
+    <mat-form-field appearance="fill">
+        <mat-label>Playlist name</mat-label>
+        <input matInput formControlName="playlistName">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>E-Mail</mat-label>
+        <input matInput formControlName="email">
+    </mat-form-field>
+</form>
 
 <button color="accent" mat-button (click)="savePlaylist()">Save</button>

@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { saveAs } from 'file-saver';
 import { debounceTime } from 'rxjs/operators';
@@ -10,6 +11,11 @@ import { debounceTime } from 'rxjs/operators';
 })
 export class SaveModalComponent implements OnInit {
 
+  public savePlaylistForm = new FormGroup({
+    playlistName: new FormControl(),
+    email: new FormControl()
+  })
+  
   constructor(
     public dialogRef: MatDialogRef<SaveModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { playlist$: any }) { }

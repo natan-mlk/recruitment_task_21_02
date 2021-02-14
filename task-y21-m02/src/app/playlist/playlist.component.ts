@@ -20,7 +20,7 @@ export class PlaylistComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.playlistSubsc = this.playlistService.playlist$.subscribe(
       playlistValue => {
-        console.log('laylistVal', playlistValue)
+        // console.log('laylistVal', playlistValue)
       }
     )
   }

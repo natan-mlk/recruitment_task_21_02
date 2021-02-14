@@ -43,7 +43,7 @@ export class AppComponent implements OnInit {
   private openDialog(playlist: any): void {
     const dialogRef = this.dialog.open(SaveModalComponent, {
       width: 'auto',
-      data: { playlist: playlist },
+      data: { playlist$: playlist },
       panelClass: 'save-dialog'
     });
 

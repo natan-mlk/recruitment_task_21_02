@@ -1,2 +1,4 @@
 <p>save-modal works!</p>
-<h1>{{data.playlist | async}}</h1>
+<h1>{{data.playlist$ | async}}</h1>
+
+<button color="accent" mat-button (click)="savePlaylist()">Save</button>

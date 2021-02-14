@@ -28,10 +28,9 @@ export class PlaylistStateService {
     this.searchResultsList.next(val);
   }
 
-
   addToPlaylist(playlistItem: PlaylistItem): void {
     this.playlistItems = [
-      ...this.playlistItems, 
+      ...this.playlistItems,
       playlistItem
     ];
   }
@@ -40,12 +39,11 @@ export class PlaylistStateService {
     this.playlistItems = this.playlistItems.filter(item => item.id !== id);
   }
 
-  addToSearchResults(sinleResult: PlaylistItem): void{
+  addToSearchResults(sinleResult: PlaylistItem): void {
     this.searchListItems = [
       ...this.searchListItems,
       sinleResult
     ]
-    // może warto żeby od razu sortowało po tym czym sortuje domyślnie? tylko po czym to robi?
   }
 
   removeFromSearchResults(id: number): void {
@@ -53,7 +51,7 @@ export class PlaylistStateService {
   }
 
   clearSearchResults(): void {
-    this.searchListItems =[];
+    this.searchListItems = [];
   }
 
   constructor() { }

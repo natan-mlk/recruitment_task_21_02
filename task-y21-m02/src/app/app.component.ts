@@ -24,18 +24,14 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.playlistSubsc = this.playlistStateService.playlist$.subscribe(
       playlistValue => {
-        console.log('playlistValue', playlistValue);
         this.playlistLength = playlistValue.length;
       }
     )
   }
 
   public showPlaylist() {
-
+    // musi śledzić ilość pozycji w playliście
   }
-  // musi śledzić ilość pozycji w playliście
-
-
 
   public savePlaylist() {
     const playlist = this.playlistStateService.playlist$;
@@ -50,8 +46,8 @@ export class AppComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result){
-        this.snackBar.open('Successfully saved playlist', undefined, {duration: 3000})
+      if (result) {
+        this.snackBar.open('Successfully saved playlist', undefined, { duration: 3000 })
       }
     });
   }

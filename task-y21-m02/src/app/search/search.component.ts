@@ -4,6 +4,7 @@ import { SearchService, SearchResult, PlaylistItem } from '../services/search.se
 import { debounceTime, mergeMap } from 'rxjs/operators';
 import { PlaylistStateService } from '../services/playlist-state.service';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -22,16 +23,18 @@ export class SearchComponent implements OnInit, OnDestroy {
   private currentSearchQuery = '';
   private currentSearchIndex = 0;
   private searchFormSubsc: Subscription = Subscription.EMPTY;
+  private activeRouteSubsc: Subscription = Subscription.EMPTY;
 
   constructor(
     private searchService: SearchService,
-    public playlistService: PlaylistStateService
-  ) {
-
-  }
+    public playlistService: PlaylistStateService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.subscribeToFormValue();
+    this.subscribeToRouteActivated();
   }
 
   loadMore(): void {
@@ -39,16 +42,10 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.currentSearchIndex += 5;
     this.searchService.getData(this.currentSearchQuery, this.currentSearchIndex).subscribe(
       (searchVal: SearchResult) => {
-        console.log('value of search', searchVal);
         const resultsArray: PlaylistItem[] = searchVal.data;
-
         for (let sinleResult of resultsArray) {
           this.playlistService.addToSearchResults(sinleResult);
         }
-
-        // resultsArray.forEach((element: PlaylistItem) => {
-        //   this.loadedItems.push(element)
-        // });
       }
     )
   }
@@ -69,6 +66,16 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.playlistService.removeFromSearchResults(item.id);
   }
 
+  private subscribeToRouteActivated() {
+    this.activeRouteSubsc = this.route.queryParams.subscribe(
+      queryParams => {
+        if (queryParams.search) {
+          this.searchForm.get('searchValue')!.setValue(queryParams.search)
+        }
+      }
+    )
+  }
+
   private subscribeToFormValue() {
     this.searchFormSubsc = this.searchForm.get('searchValue')!.valueChanges.pipe(
       debounceTime(750), // to prevent too many requests on fast typing input
@@ -79,25 +86,37 @@ export class SearchComponent implements OnInit, OnDestroy {
           this.loadedItems = [];
           this.playlistService.clearSearchResults();
           this.currentSearchQuery = formValue;
+          this.updateQueryParameters(this.currentSearchQuery);
           return this.searchService.getData(formValue, this.currentSearchIndex);
         }),
-        debounceTime(1000), // to pretend longer responce in order to see loading feature better
+      debounceTime(1000), // to pretend longer responce in order to see loading feature better
     )
       .subscribe(
         (searchResult: SearchResult) => {
-          console.log('value of search', searchResult)
           this.loadedItems = searchResult.data;
           for (let singleResult of searchResult.data) {
             this.playlistService.addToSearchResults(singleResult);
           }
           this.isSearchLoading = false;
         },
-        error => console.log('TU OBSŁUGA MOJEGO BŁĘDU', error)
+        error => console.log('error', error)
       )
   }
 
-  ngOnDestroy(): void{
+  private updateQueryParameters(param: string) {
+    this.router.navigate([],
+      {
+        queryParams: {
+          search: param
+        },
+        queryParamsHandling: 'merge'
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
     this.searchFormSubsc.unsubscribe();
+    this.activeRouteSubsc.unsubscribe();
   }
 
 }

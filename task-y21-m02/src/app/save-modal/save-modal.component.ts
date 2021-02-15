@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { Validators } from '@angular/forms';
+import { AbstractControl, ValidatorFn, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { saveAs } from 'file-saver';
 import { debounceTime } from 'rxjs/operators';
@@ -20,7 +20,7 @@ interface exportedFileData {
 export class SaveModalComponent implements OnInit {
 
   public savePlaylistForm = this.formBuilder.group({
-    name: ['', [Validators.required, Validators.minLength(3)]],
+    name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]],
     email: ['', [Validators.required, Validators.email]],
   })
 

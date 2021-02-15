@@ -9,5 +9,5 @@
 </main>
 
 <footer class="app-footer">
-  <button *ngIf="playlistLength" color="accent" mat-raised-button (click)="savePlaylist()">Save</button>
+  <button *ngIf="!!(playlistLength > 1)" color="accent" mat-raised-button (click)="savePlaylist()">Save {{(playlistLength )}}</button>
 </footer>

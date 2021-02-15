@@ -41,11 +41,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     // to też może korzystać z linka pod kluczem "next"
     this.currentSearchIndex += 5;
     this.searchService.getData(this.currentSearchQuery, this.currentSearchIndex).subscribe(
-      (searchVal: SearchResult) => {
-        const resultsArray: PlaylistItem[] = searchVal.data;
-        for (let sinleResult of resultsArray) {
-          this.playlistService.addToSearchResults(sinleResult);
-        }
+      (searchResult: SearchResult) => {
+        this.addToPlaylistConditionally(searchResult);
       }
     )
   }
@@ -78,12 +75,11 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   private subscribeToFormValue() {
     this.searchFormSubsc = this.searchForm.get('searchValue')!.valueChanges.pipe(
-      debounceTime(750), // to prevent too many requests on fast typing input
+      debounceTime(750),
       mergeMap(
         (formValue: string) => {
-          this.isSearchLoading = true;
+          this.isLoadingState(true);
           this.currentSearchIndex = 0;
-          this.loadedItems = [];
           this.playlistService.clearSearchResults();
           this.currentSearchQuery = formValue;
           this.updateQueryParameters(this.currentSearchQuery);
@@ -93,11 +89,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     )
       .subscribe(
         (searchResult: SearchResult) => {
-          this.loadedItems = searchResult.data;
-          for (let singleResult of searchResult.data) {
-            this.playlistService.addToSearchResults(singleResult);
-          }
-          this.isSearchLoading = false;
+          this.addToPlaylistConditionally(searchResult);
         },
         error => console.log('error', error)
       )
@@ -112,6 +104,28 @@ export class SearchComponent implements OnInit, OnDestroy {
         queryParamsHandling: 'merge'
       }
     );
+  }
+
+  private addToPlaylistConditionally(searchResult: SearchResult) {
+    const playlistItems = JSON.parse(localStorage.getItem('playlistItemsArray')!) || [];
+    const searchResults: PlaylistItem[] = searchResult.data;
+
+    for (let singleResult of searchResults) {
+      if (playlistItems.length) {
+        let testResult: boolean;
+        testResult = playlistItems.some((elem: any) => elem.id === singleResult.id);
+        if (!testResult) {
+          this.playlistService.addToSearchResults(singleResult);
+        }
+      } else {
+        this.playlistService.addToSearchResults(singleResult);
+      }
+    }
+    this.isLoadingState(false);
+  }
+
+  private isLoadingState(state: boolean) {
+    this.isSearchLoading = state;
   }
 
   ngOnDestroy(): void {

@@ -22,6 +22,7 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.playlistStateService.initPlaylistFromSessionStorage();
     this.playlistSubsc = this.playlistStateService.playlist$.subscribe(
       playlistValue => {
         this.playlistLength = playlistValue.length;

@@ -33,16 +33,25 @@ export class PlaylistStateService {
       ...this.playlistItems,
       playlistItem
     ];
+    localStorage.setItem('playlistItemsArray', JSON.stringify(this.playlistItems));
+  }
+
+  initPlaylistFromSessionStorage(){
+    const oldItemsArray = JSON.parse(localStorage.getItem('playlistItemsArray')!) || []; 
+    console.log('Storage State after parse', oldItemsArray)
+    this.playlistItems = oldItemsArray;
   }
 
   removeFromPlaylist(id: number): void {
     this.playlistItems = this.playlistItems.filter(item => item.id !== id);
+    localStorage.clear();
+    localStorage.setItem('playlistItemsArray', JSON.stringify(this.playlistItems));
   }
 
-  addToSearchResults(sinleResult: PlaylistItem): void {
+  addToSearchResults(singleResult: PlaylistItem): void {
     this.searchListItems = [
       ...this.searchListItems,
-      sinleResult
+      singleResult
     ]
   }
 

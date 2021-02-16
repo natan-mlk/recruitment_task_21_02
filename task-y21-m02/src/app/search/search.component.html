@@ -12,7 +12,7 @@
 
     <mat-list>
         <mat-list-item class="list-item" *ngFor="let item of playlistService.searchResultsList$ | async" (click)="addToPlaylist(item)">
-            <app-search-result-item [item]="item"></app-search-result-item>
+            <app-search-result-item [item]="item" [isSearchResult]="true"></app-search-result-item>
         </mat-list-item>
     </mat-list>
 

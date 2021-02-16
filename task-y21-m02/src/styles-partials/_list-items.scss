@@ -6,28 +6,44 @@
     border-bottom: 1px solid rgb(89 89 89);
 }
 
-.list-item__track-info {
-    display: flex;
-    padding: 10px 0;
+.list-item {
+    &__remove {
+        display: flex;
+        align-items: center;
 
-    &__cover {
-        img {
-            border-radius: 50%;
+        .mat-icon {
+            cursor: pointer;
+            height: $itemListIconSize;
+            width: $itemListIconSize;
+            font-size: $itemListIconSize;
+            color: $itemListIconColor;
         }
     }
 
-    &__captions {
-        margin: 0 0 0 10px;
+    &__track-info {
         display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
+        padding: 10px 0;
+        flex-grow: 1;
 
-        &--title {
-            font-size: $trackTitleFontSize;
+        &__cover {
+            img {
+                border-radius: 50%;
+            }
         }
 
-        &--name {
-            font-size: $trackAuthorFontSize;
+        &__captions {
+            margin: 0 0 0 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+
+            &--title {
+                font-size: $trackTitleFontSize;
+            }
+
+            &--name {
+                font-size: $trackAuthorFontSize;
+            }
         }
     }
 }

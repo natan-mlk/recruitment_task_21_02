@@ -8,10 +8,26 @@ import { PlaylistItem } from 'src/app/services/search.service';
 })
 export class SearchResultItemComponent implements OnInit {
 
-  @Input() item: any; 
-  constructor() { }
+  @Input() item: PlaylistItem; 
+  @Input() isSearchResult: boolean;
+  
+  constructor() { 
+    this.isSearchResult = false;
+    this.item = {
+      id: 0,
+      title: 'string',
+      artist: {
+        name: 'string',
+      },
+      album: {
+        cover_small: 'string'
+      }
+    };
+  }
 
   ngOnInit(): void {
   }
+
+  removeItem():void {}
 
 }

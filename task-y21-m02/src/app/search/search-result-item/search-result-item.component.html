@@ -1,5 +1,5 @@
 
-    <div class="list-item__track-info">
+    <div class="list-item__track-info" [ngStyle]="isSearchResult ? {'cursor': 'pointer'} : {'cursor': 'default'}">
         <div class="list-item__track-info__cover">
             <img src={{item.album.cover_small}}>
         </div>
@@ -8,5 +8,10 @@
             <span class="list-item__track-info__captions--name">{{item.artist.name}}</span>
         </div>
 
+    </div>
+
+    <div class="list-item__remove" *ngIf="!isSearchResult">
+        <!-- <mat-icon aria-hidden="false" aria-label="Remove item from list">remove_circle_outline</mat-icon> -->
+        <mat-icon (click)="removeItem()" aria-hidden="false" aria-label="Remove item from list">highlight_off</mat-icon>
     </div>
 

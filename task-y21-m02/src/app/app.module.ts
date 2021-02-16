@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PlaylistComponent } from './playlist/playlist.component';
 import { SearchComponent } from './search/search.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SearchResultItemComponent } from './search/search-result-item/search-result-item.component';
+import { SaveModalComponent } from './save-modal/save-modal.component';
 
 //material imports
 import { MatCardModule } from '@angular/material/card';
@@ -17,9 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import { SaveModalComponent } from './save-modal/save-modal.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { SearchResultItemComponent } from './search/search-result-item/search-result-item.component';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { SearchResultItemComponent } from './search/search-result-item/search-re
     MatProgressBarModule,
     MatButtonModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

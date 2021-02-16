@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
 
   @ViewChild('playlistComponent', { read: ElementRef }) playlistComponent: ElementRef;
   @ViewChild('searchComponent', { read: ElementRef }) searchComponent: ElementRef;
+  @ViewChild('showButton', { read: ElementRef }) showButton: ElementRef;
 
   constructor(
     public dialog: MatDialog,
@@ -62,6 +63,9 @@ export class AppComponent implements OnInit {
       this.renderer.addClass(
         this.searchComponent.nativeElement, 'mobile-hidden'
       )
+      this.renderer.addClass(
+        this.showButton.nativeElement, 'mobile-hidden'
+      )
     } else {
       if (this.playlistComponent) {
         this.renderer.removeClass(
@@ -69,6 +73,9 @@ export class AppComponent implements OnInit {
         )
         this.renderer.removeClass(
           this.searchComponent.nativeElement, 'mobile-hidden'
+        )
+        this.renderer.removeClass(
+          this.showButton.nativeElement, 'mobile-hidden'
         )
       }
     }

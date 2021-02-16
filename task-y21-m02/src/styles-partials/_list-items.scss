@@ -13,9 +13,9 @@
 
         .mat-icon {
             cursor: pointer;
-            height: $itemListIconSize;
-            width: $itemListIconSize;
-            font-size: $itemListIconSize;
+            height: $itemListIconSizeMobile;
+            width: $itemListIconSizeMobile;
+            font-size: $itemListIconSizeMobile;
             color: $itemListIconColor;
         }
     }
@@ -43,6 +43,19 @@
 
             &--name {
                 font-size: $trackAuthorFontSize;
+            }
+        }
+    }
+}
+
+@media (min-width: $desktopBreakpoint) {
+    .list-item {
+        &__remove {
+    
+            .mat-icon {
+                height: $itemListIconSize;
+                width: $itemListIconSize;
+                font-size: $itemListIconSize;
             }
         }
     }

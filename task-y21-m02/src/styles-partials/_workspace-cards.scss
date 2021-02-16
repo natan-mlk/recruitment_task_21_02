@@ -3,18 +3,21 @@
 .workspace-card {
     background-color: $workspaceCardColor;
     height: 100%;
-
-    // &--playlist {
-    //     width: 30%;
-    // }
-
-    // &--search {
-    //     width: 70%;
-    // }
+    &__header {
+        color: $mainFontColor;
+        font-size: $trackAuthorFontSize;
+        padding: 20px 0;
+        justify-content: space-between;
+    }
 }
 
 @media (min-width: $desktopBreakpoint) {
     .workspace-card {
+        &__header {
+            mat-icon {
+                display: none;
+            }
+        }
         &--playlist {
             margin-right: 20%;
         }

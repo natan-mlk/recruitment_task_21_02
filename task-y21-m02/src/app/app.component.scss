@@ -14,8 +14,8 @@
     height: calc(100vh - 70px);
     padding: 1.7rem 1rem 1rem;
 
-
-    &__playlist, &__search {
+    &__playlist,
+    &__search {
         width: 100%;
         height: 100%;
     }
@@ -26,8 +26,11 @@
     bottom: 0;
     right: 0;
 
-    &__show-button{
+    &__show-button {
         display: block;
+        &.mobile-hidden {
+            display: none;
+        }
     }
 }
 
@@ -57,7 +60,7 @@ app-search {
         }
 
         &__playlist {
-            width: 40%;
+            width: 40%; 
         }
     }
 
@@ -66,15 +69,13 @@ app-search {
     }
 
     app-search {
-    
         &.mobile-hidden {
             display: block;
         }
     }
 
     .app-footer {
-    
-        &__show-button{
+        &__show-button {
             display: none;
         }
     }

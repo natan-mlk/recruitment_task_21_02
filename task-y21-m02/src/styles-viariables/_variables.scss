@@ -3,13 +3,18 @@ $desktopBreakpoint: 600px;
 // fonts
 $mainFontFamily: Roboto, sans-serif;
 $mainFontColor: rgb(199 199 199);
+$trackTitleFontSizeMobile: 1rem;
+$trackAuthorFontSizeMobile: 0.9rem;
 $trackTitleFontSize: 1.3rem;
 $trackAuthorFontSize: 1rem;
+
 //colors
 $appBackgroungColor: rgb(48 48 48);
 $appHeaderColor: rgb(255 118 38);
 $workspaceCardColor: rgb(66 66 66);
 
 //mat-icon
-$itemListIconSize: 34px;
+$itemListIconSizeMobile: 24px;
 $itemListIconColor: white;
+$itemListIconSize: 34px;
+

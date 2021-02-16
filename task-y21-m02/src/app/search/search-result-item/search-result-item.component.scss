@@ -1,5 +1,16 @@
+@import "styles-viariables/variables";
+
 :host {
     width: 100%;
     display: flex;
     justify-content: space-between;
+}
+
+.list-item__track-info__cover {
+    img {
+        height: 40px;
+        @media (min-width: $desktopBreakpoint) {
+            height: auto;
+        }
+    }
 }

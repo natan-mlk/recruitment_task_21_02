@@ -26,6 +26,8 @@
         flex-grow: 1;
 
         &__cover {
+            display: flex;
+            align-items: center;
             img {
                 border-radius: 50%;
                 height: 40px;

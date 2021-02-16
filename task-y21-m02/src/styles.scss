@@ -1,5 +1,6 @@
 @import "styles-viariables/variables";
 @import "./styles-partials/workspace-cards";
+@import "./styles-partials/list-items";
 
 html,
 body {
@@ -9,6 +10,7 @@ body {
     margin: 0;
     font-family: $mainFontFamily;
     background-color: $appBackgroungColor;
+    color: $mainFontColor;
 }
 
 * {

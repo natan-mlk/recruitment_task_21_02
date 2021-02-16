@@ -1,0 +1,33 @@
+@import "styles-viariables/variables";
+
+.mat-list-base .mat-list-item.list-item {
+    height: fit-content;
+    color: $mainFontColor;
+    border-bottom: 1px solid rgb(89 89 89);
+}
+
+.list-item__track-info {
+    display: flex;
+    padding: 10px 0;
+
+    &__cover {
+        img {
+            border-radius: 50%;
+        }
+    }
+
+    &__captions {
+        margin: 0 0 0 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+
+        &--title {
+            font-size: $trackTitleFontSize;
+        }
+
+        &--name {
+            font-size: $trackAuthorFontSize;
+        }
+    }
+}

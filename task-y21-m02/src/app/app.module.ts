@@ -19,13 +19,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SaveModalComponent } from './save-modal/save-modal.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SearchResultItemComponent } from './search/search-result-item/search-result-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PlaylistComponent,
     SearchComponent,
-    SaveModalComponent
+    SaveModalComponent,
+    SearchResultItemComponent
   ],
   imports: [
     BrowserModule,

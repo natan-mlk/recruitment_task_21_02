@@ -11,10 +11,8 @@
     <mat-progress-bar mode="indeterminate" *ngIf="isSearchLoading"></mat-progress-bar>
 
     <mat-list>
-        <mat-list-item *ngFor="let item of playlistService.searchResultsList$ | async" (click)="addToPlaylist(item)">
-            {{item.title}}<br>
-            {{item.artist.name}}<br>
-            <img src={{item.album.cover_small}}>
+        <mat-list-item class="list-item" *ngFor="let item of playlistService.searchResultsList$ | async" (click)="addToPlaylist(item)">
+            <app-search-result-item [item]="item"></app-search-result-item>
         </mat-list-item>
     </mat-list>
 

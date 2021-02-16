@@ -23,7 +23,7 @@ mat-card.mat-card {
     background-color: $workspaceCardColor;
     height: 100%;
     &__header {
-        color: $mainFontColor;
+        // color: $mainFontColor;
         font-size: $trackAuthorFontSize;
 
         &--playlist {
@@ -48,7 +48,7 @@ mat-card-actions.mat-card-actions {
     flex-direction: column;
 
     button {
-        color: $mainFontColor;
+        // color: $mainFontColor;
         font-size: $trackAuthorFontSize;
     }
 }

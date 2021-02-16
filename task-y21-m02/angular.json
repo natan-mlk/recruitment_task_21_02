@@ -31,14 +31,14 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "src/styles-viariables/theme.scss",
               "src/styles.scss"
             ],
             "scripts": [],
             "stylePreprocessorOptions":  {
               "includePaths": [
                  "./src",
-                 "./src/styles-variables"
+                 "./src/styles-viariables"
               ]
            }
           },
@@ -101,7 +101,7 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "src/styles-viariables/theme.scss",
               "src/styles.scss"
             ],
             "scripts": []

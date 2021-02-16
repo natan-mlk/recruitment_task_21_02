@@ -1,4 +1,5 @@
 <mat-card class="workspace-card workspace-card--playlist">
+    <div (click)="closeOnMobileView()">CLOSE ME</div>
     <mat-list>
         <mat-list-item class="list-item" *ngFor="let item of playlistService.playlist$ | async">
             <app-search-result-item [item]="item"></app-search-result-item>

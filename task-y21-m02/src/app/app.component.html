@@ -3,11 +3,17 @@
 </header>
 
 <main class="app-workspace">
-  <app-playlist class="app-workspace__playlist" #playlist></app-playlist>
-  <app-search class="app-workspace__search"></app-search>
-  <!-- <button mat-button (click)="showPlaylist()">TEST </button> -->
+  <app-playlist class="app-workspace__playlist" #playlistComponent></app-playlist>
+  <app-search class="app-workspace__search" #searchComponent></app-search>
 </main>
 
 <footer class="app-footer">
-  <button *ngIf="!!(playlistLength > 1)" color="accent" mat-raised-button (click)="savePlaylist()">Save {{(playlistLength )}}</button>
+  <button class="app-footer__show-button" 
+    mat-raised-button color="accent" 
+    (click)="showPlaylist()">{{'playlist' | uppercase}} ({{playlistLength}})</button>
+
+  <button *ngIf="!!(playlistLength > 1)" color="accent" mat-raised-button (click)="savePlaylist()">
+    {{'save' | uppercase}}
+    <mat-icon aria-hidden="false" aria-label="Save playlist">save_alt</mat-icon> 
+  </button>
 </footer>

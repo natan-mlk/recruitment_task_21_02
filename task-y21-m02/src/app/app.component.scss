@@ -25,10 +25,26 @@
     position: fixed;
     bottom: 0;
     right: 0;
+
+    &__show-button{
+        display: block;
+    }
 }
 
 app-playlist {
     display: none;
+
+    &.mobile-visible {
+        display: block;
+    }
+}
+
+app-search {
+    display: block;
+
+    &.mobile-hidden {
+        display: none;
+    }
 }
 
 @media (min-width: $desktopBreakpoint) {
@@ -47,5 +63,19 @@ app-playlist {
 
     app-playlist {
         display: block;
+    }
+
+    app-search {
+    
+        &.mobile-hidden {
+            display: block;
+        }
+    }
+
+    .app-footer {
+    
+        &__show-button{
+            display: none;
+        }
     }
 }

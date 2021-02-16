@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { PlaylistStateService } from 'src/app/services/playlist-state.service';
 import { PlaylistItem } from 'src/app/services/search.service';
 
 @Component({
@@ -8,10 +9,12 @@ import { PlaylistItem } from 'src/app/services/search.service';
 })
 export class SearchResultItemComponent implements OnInit {
 
-  @Input() item: PlaylistItem; 
+  @Input() item: PlaylistItem;
   @Input() isSearchResult: boolean;
-  
-  constructor() { 
+
+  constructor(
+    public playlistService: PlaylistStateService
+  ) {
     this.isSearchResult = false;
     this.item = {
       id: 0,
@@ -28,6 +31,20 @@ export class SearchResultItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  removeItem():void {}
-
+  removeFromList(): void {
+    const item = this.item;
+    this.playlistService.removeFromPlaylist(item.id);
+    this.playlistService.addToSearchResults(
+      {
+        title: item.title,
+        artist: {
+          name: item.artist.name,
+        },
+        album: {
+          cover_small: item.album.cover_small
+        },
+        id: item.id
+      }
+    );
+  }
 }

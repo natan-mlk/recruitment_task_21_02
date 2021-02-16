@@ -24,21 +24,7 @@ export class PlaylistComponent implements OnInit, OnDestroy {
     // )
   }
 
-  removeFromList(id: number, item: PlaylistItem): void {
-    this.playlistService.removeFromPlaylist(id);
-    this.playlistService.addToSearchResults(
-      {
-        title: item.title,
-        artist: {
-          name: item.artist.name,
-        },
-        album: {
-          cover_small: item.album.cover_small
-        },
-        id: item.id
-      }
-    );
-  }
+
 
   ngOnDestroy(): void {
     // this.playlistSubsc.unsubscribe();

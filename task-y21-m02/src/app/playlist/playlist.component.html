@@ -1,6 +1,6 @@
 <mat-card class="workspace-card workspace-card--playlist">
     <mat-list>
-        <mat-list-item class="list-item" *ngFor="let item of playlistService.playlist$ | async" (click)="removeFromList(item.id, item)">
+        <mat-list-item class="list-item" *ngFor="let item of playlistService.playlist$ | async">
             <app-search-result-item [item]="item"></app-search-result-item>
         </mat-list-item>
     </mat-list>

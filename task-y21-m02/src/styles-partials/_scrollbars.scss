@@ -1,0 +1,17 @@
+@import "styles-viariables/variables";
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: $workspaceCardColor;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: $appHeaderColor;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: darken($appHeaderColor, 10);
+  }

@@ -6,8 +6,7 @@ import { PlaylistItem } from '../services/search.service';
 
 @Component({
   selector: 'app-playlist',
-  templateUrl: './playlist.component.html',
-  styleUrls: ['./playlist.component.scss']
+  templateUrl: './playlist.component.html'
 })
 export class PlaylistComponent implements OnInit, OnDestroy {
 

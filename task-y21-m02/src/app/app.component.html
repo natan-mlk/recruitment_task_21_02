@@ -15,6 +15,7 @@
   </button>
 
   <button *ngIf="!!(playlistLength > 1)" 
+    class="app-footer__save-button" 
     color="accent" mat-raised-button 
     (click)="savePlaylist()">
     {{'save' | uppercase}}

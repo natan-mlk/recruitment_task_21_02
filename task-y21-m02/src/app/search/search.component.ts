@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SearchService, SearchResult, PlaylistItem } from '../services/search.service';
-import { debounceTime, mergeMap } from 'rxjs/operators';
+import { debounceTime, delay, mergeMap } from 'rxjs/operators';
 import { PlaylistStateService } from '../services/playlist-state.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -40,7 +40,10 @@ export class SearchComponent implements OnInit, OnDestroy {
   loadMore(): void {
     // to też może korzystać z linka pod kluczem "next"
     this.currentSearchIndex += 5;
-    this.searchService.getData(this.currentSearchQuery, this.currentSearchIndex).subscribe(
+    this.isLoadingState(true);
+    this.searchService.getData(this.currentSearchQuery, this.currentSearchIndex).pipe(
+      delay(1000)
+      ).subscribe(
       (searchResult: SearchResult) => {
         this.addToPlaylistConditionally(searchResult);
       }

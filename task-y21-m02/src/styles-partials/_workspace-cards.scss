@@ -6,8 +6,31 @@
     &__header {
         color: $mainFontColor;
         font-size: $trackAuthorFontSize;
-        padding: 20px 0;
-        justify-content: space-between;
+
+        &--playlist {
+            padding: 20px 0;
+            justify-content: space-between;
+        }
+
+        .mat-card-header-text {
+            width: 100%;
+
+            .mat-form-field {
+                width: 100%;
+            }
+        }
+    }
+}
+
+mat-card-actions.mat-card-actions {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+
+    button {
+        color: $mainFontColor;
+        font-size: $trackAuthorFontSize;
     }
 }
 

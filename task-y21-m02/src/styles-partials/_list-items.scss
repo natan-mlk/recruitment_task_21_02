@@ -28,6 +28,7 @@
         &__cover {
             img {
                 border-radius: 50%;
+                height: 40px;
             }
         }
 
@@ -38,11 +39,11 @@
             justify-content: space-evenly;
 
             &--title {
-                font-size: $trackTitleFontSize;
+                font-size: $trackTitleFontSizeMobile;
             }
 
             &--name {
-                font-size: $trackAuthorFontSize;
+                font-size: $trackAuthorFontSizeMobile;
             }
         }
     }
@@ -51,11 +52,33 @@
 @media (min-width: $desktopBreakpoint) {
     .list-item {
         &__remove {
-    
             .mat-icon {
                 height: $itemListIconSize;
                 width: $itemListIconSize;
                 font-size: $itemListIconSize;
+            }
+        }
+
+        &__track-info {
+            &__cover {
+                img {                    
+                    height: auto;
+                }
+            }
+
+            &__captions {
+                margin: 0 0 0 10px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+
+                &--title {
+                    font-size: $trackTitleFontSize;
+                }
+
+                &--name {
+                    font-size: $trackAuthorFontSize;
+                }
             }
         }
     }

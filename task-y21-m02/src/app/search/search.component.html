@@ -1,25 +1,30 @@
 <mat-card class="workspace-card workspace-card--search">
     <mat-card-header class="workspace-card__header">
-        <form [formGroup]="searchForm">
-            <mat-form-field appearance="fill">
-                <mat-label>Search</mat-label>
-                <input matInput formControlName="searchValue">
-            </mat-form-field>
-        </form>
+        <mat-card-title>
+            <form [formGroup]="searchForm">
+                <mat-form-field appearance="fill">
+                    <mat-label>Search</mat-label>
+                    <input matInput formControlName="searchValue">
+                </mat-form-field>
+            </form>
+        </mat-card-title>
     </mat-card-header>
 
     <mat-card-content>
-            <mat-list>
-        <mat-list-item class="list-item" *ngFor="let item of playlistService.searchResultsList$ | async" (click)="addToPlaylist(item)">
-            <app-search-result-item [item]="item" [isSearchResult]="true"></app-search-result-item>
-        </mat-list-item>
-    </mat-list>
+        <mat-list>
+            <mat-list-item class="list-item" *ngFor="let item of playlistService.searchResultsList$ | async"
+                (click)="addToPlaylist(item)">
+                <app-search-result-item [item]="item" [isSearchResult]="true"></app-search-result-item>
+            </mat-list-item>
+        </mat-list>
     </mat-card-content>
 
 
     <mat-card-actions>
-    <mat-progress-bar mode="indeterminate" *ngIf="isSearchLoading"></mat-progress-bar>
-
-        <button mat-button (click)="loadMore()">LOAD MORE</button>
+        <mat-progress-bar mode="indeterminate" *ngIf="isSearchLoading"></mat-progress-bar>
+        <button mat-button (click)="loadMore()" *ngIf="!isSearchLoading">
+            {{'more' | uppercase}}
+            <mat-icon aria-label="Load more results">expand_more</mat-icon>
+        </button>
     </mat-card-actions>
 </mat-card>

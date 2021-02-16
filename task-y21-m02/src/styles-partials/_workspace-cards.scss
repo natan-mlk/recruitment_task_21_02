@@ -1,5 +1,24 @@
 @import "styles-viariables/variables";
 
+// material design changes
+mat-card.mat-card {
+    display: flex;
+    flex-direction: column;
+
+    .mat-card-header .mat-card-title{
+        margin-bottom: 0;
+    }
+
+    .mat-card-content {
+        overflow-y: auto;
+    }
+
+    .mat-card-header-text{
+        margin: 0;
+    }
+}
+// end of material design changes----
+
 .workspace-card {
     background-color: $workspaceCardColor;
     height: 100%;

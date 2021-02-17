@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { SaveModalComponent } from './save-modal/save-modal.component';
 import { PlaylistStateService } from './services/playlist-state.service';
 import { CardsVisibilityMobileService } from './services/panels-visibility-mobile.service';
+import { CustomSnackbarComponent } from './save-modal/custom-snackbar/custom-snackbar.component';
 
 @Component({
   selector: 'app-root',
@@ -91,17 +92,15 @@ export class AppComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.snackBar.open('Successfully saved playlist', undefined, { duration: 3000 })
+        // this.snackBar.open('Successfully saved playlist', undefined)
+        this.snackBar.openFromComponent(CustomSnackbarComponent, 
+          { duration: 3000 }
+        );
       }
+        // this.snackBar.open('Successfully saved playlist', undefined, { duration: 3000 })
+      
     });
   }
-
-  // const dialogRef = this.dialog.open(GalleryDialogComponent, {
-  //   width: 'auto',
-  //   data: {album: this.album, index: idx},
-  //   panelClass: 'gallery-dialog',
-  //   maxWidth: '90vw'
-  // });
 
   ngOnDestroy(): void {
     this.playlistSubsc.unsubscribe();

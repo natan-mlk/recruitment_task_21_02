@@ -21,6 +21,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatIconModule} from '@angular/material/icon';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { CustomSnackbarComponent } from './save-modal/custom-snackbar/custom-snackbar.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import {MatIconModule} from '@angular/material/icon';
     PlaylistComponent,
     SearchComponent,
     SaveModalComponent,
-    SearchResultItemComponent
+    SearchResultItemComponent,
+    CustomSnackbarComponent
   ],
   imports: [
     BrowserModule,

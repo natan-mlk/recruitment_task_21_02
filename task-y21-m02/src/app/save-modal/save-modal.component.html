@@ -26,9 +26,13 @@
         </mat-form-field>
     </form>
 
+    <div class="progress-container">
+        <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+    </div>
+
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
     <button mat-button (click)="savePlaylist()" [disabled]="!savePlaylistForm.valid">{{'save' | uppercase}}</button>
-    <button mat-button mat-dialog-close>{{'cancel' | uppercase}}</button>
+    <button mat-button mat-dialog-close [disabled]="isLoading">{{'cancel' | uppercase}}</button>
 </mat-dialog-actions>

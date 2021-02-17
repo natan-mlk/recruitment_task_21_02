@@ -27,6 +27,8 @@ export class SaveModalComponent implements OnInit {
   get name() { return this.savePlaylistForm.get('name'); }
   get email() { return this.savePlaylistForm.get('email'); }
 
+  public isLoading: boolean = false;
+
   constructor(
     public dialogRef: MatDialogRef<SaveModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { playlist$: any },
@@ -35,6 +37,8 @@ export class SaveModalComponent implements OnInit {
   ngOnInit(): void { }
 
   savePlaylist(): void {
+    this.isLoading = true;
+    this.savePlaylistForm.disable();
     let playlistJsonData = '';
     this.data.playlist$.pipe(
       debounceTime(1500)
@@ -50,12 +54,13 @@ export class SaveModalComponent implements OnInit {
           const exportedFileDataJson = JSON.stringify(exportedFileData);
           const blob = new Blob([exportedFileDataJson], { type: "text/plain;charset=utf-8" });
           saveAs(blob, exportedFileData.name + ".txt");
+          this.isLoading = false;
           this.dialogRef.close(true);
         }
       )
   }
 
-  closeModal(){
+  closeModal() {
     this.dialogRef.close(false);
   }
 }

@@ -17,7 +17,6 @@ export class SearchComponent implements OnInit, OnDestroy {
   public searchForm = new FormGroup({
     searchValue: new FormControl()
   })
-  public loadedItems: PlaylistItem[] | any; // pozbyć się tego? Może jeszcze się przyda potem
   public isSearchLoading: boolean = false;
 
   private currentSearchQuery = '';
@@ -39,7 +38,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   loadMore(): void {
-    // to też może korzystać z linka pod kluczem "next"
+    // this can also use a link under key "next"
     this.currentSearchIndex += 5;
     this.isLoadingState(true);
     this.searchService.getData(this.currentSearchQuery, this.currentSearchIndex).pipe(

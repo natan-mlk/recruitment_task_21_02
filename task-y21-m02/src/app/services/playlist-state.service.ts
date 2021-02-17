@@ -36,8 +36,8 @@ export class PlaylistStateService {
     localStorage.setItem('playlistItemsArray', JSON.stringify(this.playlistItems));
   }
 
-  initPlaylistFromSessionStorage(){
-    const oldItemsArray = JSON.parse(localStorage.getItem('playlistItemsArray')!) || []; 
+  initPlaylistFromSessionStorage() {
+    const oldItemsArray = JSON.parse(localStorage.getItem('playlistItemsArray')!) || [];
     console.log('Storage State after parse', oldItemsArray)
     this.playlistItems = oldItemsArray;
   }

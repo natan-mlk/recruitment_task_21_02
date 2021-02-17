@@ -8,17 +8,13 @@
 </main>
 
 <footer class="app-footer">
-  <button #showButton
-    class="app-footer__show-button" 
-    mat-raised-button color="accent" 
+  <button #showButton class="app-footer__show-button" mat-raised-button color="accent"
     (click)="showPlaylist()">{{'playlist' | uppercase}} ({{playlistLength}})
   </button>
 
-  <button *ngIf="!!(playlistLength > 1)" 
-    class="app-footer__save-button" 
-    color="accent" mat-raised-button 
+  <button *ngIf="!!(playlistLength > 1)" class="app-footer__save-button" color="accent" mat-raised-button
     (click)="savePlaylist()">
     {{'save' | uppercase}}
-    <mat-icon aria-hidden="false" aria-label="Save playlist">save_alt</mat-icon> 
+    <mat-icon aria-hidden="false" aria-label="Save playlist">save_alt</mat-icon>
   </button>
 </footer>

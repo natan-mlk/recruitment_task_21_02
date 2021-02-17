@@ -3,12 +3,12 @@
         <mat-card-title>Your playlist</mat-card-title>
         <mat-icon (click)="closeOnMobileView()" aria-hidden="false" aria-label="Remove item from list">close</mat-icon>
     </mat-card-header>
-    
+
     <mat-card-content>
-    <mat-list>
-        <mat-list-item class="list-item" *ngFor="let item of playlistService.playlist$ | async">
-            <app-search-result-item [item]="item"></app-search-result-item>
-        </mat-list-item>
-    </mat-list>
+        <mat-list>
+            <mat-list-item class="list-item" *ngFor="let item of playlistService.playlist$ | async">
+                <app-search-result-item [item]="item"></app-search-result-item>
+            </mat-list-item>
+        </mat-list>
     </mat-card-content>
 </mat-card>

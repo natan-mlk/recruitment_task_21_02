@@ -18,7 +18,6 @@ export class AppComponent implements OnInit {
   private playlistSubsc: Subscription = Subscription.EMPTY;
   private panelsVisibilitySubsc: Subscription = Subscription.EMPTY;
 
-
   @ViewChild('playlistComponent', { read: ElementRef }) playlistComponent: ElementRef;
   @ViewChild('searchComponent', { read: ElementRef }) searchComponent: ElementRef;
   @ViewChild('showButton', { read: ElementRef }) showButton: ElementRef;
@@ -29,12 +28,23 @@ export class AppComponent implements OnInit {
     private snackBar: MatSnackBar,
     private renderer: Renderer2,
     private cardsVisibilityService: CardsVisibilityMobileService
-  ) {
-
-  }
+  ) { }
 
   ngOnInit(): void {
     this.playlistStateService.initPlaylistFromSessionStorage();
+    this.runSubscriptions();
+  }
+
+  public showPlaylist() {
+    this.cardsVisibilityService.openPlaylist(true);
+  }
+
+  public savePlaylist() {
+    const playlist = this.playlistStateService.playlist$;
+    this.openDialog(playlist);
+  }
+
+  private runSubscriptions(){
     this.playlistSubsc = this.playlistStateService.playlist$.subscribe(
       playlistValue => {
         this.playlistLength = playlistValue.length;
@@ -45,15 +55,6 @@ export class AppComponent implements OnInit {
         this.setVisibilityOfCards(isPlaylistVisible);
       }
     )
-  }
-
-  public showPlaylist() {
-    this.cardsVisibilityService.openPlaylist(true);
-  }
-
-  public savePlaylist() {
-    const playlist = this.playlistStateService.playlist$;
-    this.openDialog(playlist);
   }
 
   private setVisibilityOfCards(isPlaylistVisible: boolean) {
@@ -92,13 +93,10 @@ export class AppComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // this.snackBar.open('Successfully saved playlist', undefined)
-        this.snackBar.openFromComponent(CustomSnackbarComponent, 
+        this.snackBar.openFromComponent(CustomSnackbarComponent,
           { duration: 3000 }
         );
       }
-        // this.snackBar.open('Successfully saved playlist', undefined, { duration: 3000 })
-      
     });
   }
 

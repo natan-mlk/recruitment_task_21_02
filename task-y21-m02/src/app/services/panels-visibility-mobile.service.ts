@@ -9,10 +9,9 @@ export class CardsVisibilityMobileService {
   private readonly isPlaylistVisible: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   @Output() change$: Observable<boolean> = this.isPlaylistVisible.asObservable();
-  public openPlaylist(isPlaylistVisible:boolean) {
-    this.isPlaylistVisible.next(isPlaylistVisible);
-  }
+  public openPlaylist(isPlaylistVisible: boolean) {
+    this.isPlaylistVisible.next(isPlaylistVisible);
+  }
 
-  
   constructor() { }
 }

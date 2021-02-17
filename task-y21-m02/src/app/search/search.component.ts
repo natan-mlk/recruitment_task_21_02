@@ -5,6 +5,7 @@ import { debounceTime, delay, mergeMap } from 'rxjs/operators';
 import { PlaylistStateService } from '../services/playlist-state.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-search',
@@ -28,7 +29,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     private searchService: SearchService,
     public playlistService: PlaylistStateService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
@@ -93,7 +95,11 @@ export class SearchComponent implements OnInit, OnDestroy {
         (searchResult: SearchResult) => {
           this.addToPlaylistConditionally(searchResult);
         },
-        error => console.log('error', error)
+        error => {
+          this.isLoadingState(false);
+          this.snackBar.open('Server problem. Please reload app', undefined, { duration: 3000 })
+          console.log('error', error)
+        }
       )
   }
 

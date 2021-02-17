@@ -4,7 +4,8 @@ import { Observable, throwError } from 'rxjs';
 
 export interface SearchResult {
   data: Array<PlaylistItem>,
-  next: string
+  next: string,
+  error?: any
 }
 
 export interface PlaylistItem {

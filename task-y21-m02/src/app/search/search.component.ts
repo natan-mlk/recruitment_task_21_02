@@ -18,6 +18,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     searchValue: new FormControl()
   })
   public isSearchLoading: boolean = false;
+  public isEmptyList: boolean = true;
 
   private currentSearchQuery = '';
   private currentSearchIndex = 0;
@@ -43,7 +44,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.isLoadingState(true);
     this.searchService.getData(this.currentSearchQuery, this.currentSearchIndex).pipe(
       delay(1000)
-      ).subscribe(
+    ).subscribe(
       (searchResult: SearchResult) => {
         this.addToPlaylistConditionally(searchResult);
       }
@@ -92,7 +93,14 @@ export class SearchComponent implements OnInit, OnDestroy {
     )
       .subscribe(
         (searchResult: SearchResult) => {
-          this.addToPlaylistConditionally(searchResult);
+          if (searchResult.error) {
+            this.isLoadingState(false);
+            this.snackBar.open(searchResult.error.message, undefined, { duration: 3000 })
+            this.isEmptyList = true;
+          } else {
+            this.isEmptyList = searchResult.data!.length ? false : true;
+            this.addToPlaylistConditionally(searchResult);
+          }
         },
         error => {
           this.isLoadingState(false);

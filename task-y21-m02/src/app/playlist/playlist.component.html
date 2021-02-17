@@ -4,6 +4,19 @@
         <mat-icon (click)="closeOnMobileView()" aria-hidden="false" aria-label="Remove item from list">close</mat-icon>
     </mat-card-header>
 
+    <ng-container *ngIf="!(playlistService.playlist$ | async).length">
+        <div class="workspace-card__empty-list">
+            <div class="workspace-card__empty-list__message">
+                <h1>
+                    <mat-icon aria-hidden="false" aria-label="Save playlist">music_note</mat-icon>
+                    <mat-icon aria-hidden="false" aria-label="Save playlist">music_note</mat-icon>
+                    <mat-icon aria-hidden="false" aria-label="Save playlist">music_note</mat-icon>
+                </h1>
+                <h1>Add your songs :)</h1>
+            </div>
+        </div>
+    </ng-container>
+
     <mat-card-content>
         <mat-list>
             <mat-list-item class="list-item" *ngFor="let item of playlistService.playlist$ | async">

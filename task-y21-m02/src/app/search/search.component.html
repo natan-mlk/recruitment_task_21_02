@@ -10,6 +10,19 @@
         </mat-card-title>
     </mat-card-header>
 
+    <ng-container *ngIf="!(playlistService.searchResultsList$ | async).length && !isSearchLoading">
+        <div class="workspace-card__empty-list">
+            <div class="workspace-card__empty-list__message">
+                <h1>
+                    <mat-icon aria-hidden="false" aria-label="Save playlist">music_note</mat-icon>
+                    <mat-icon aria-hidden="false" aria-label="Save playlist">music_note</mat-icon>
+                    <mat-icon aria-hidden="false" aria-label="Save playlist">music_note</mat-icon>
+                </h1>
+                <h1>Type in your favorite artist or song</h1>
+            </div>
+        </div>
+    </ng-container>
+
     <mat-card-content>
         <mat-list>
             <mat-list-item class="list-item" *ngFor="let item of playlistService.searchResultsList$ | async"
@@ -22,7 +35,7 @@
 
     <mat-card-actions>
         <mat-progress-bar mode="indeterminate" *ngIf="isSearchLoading"></mat-progress-bar>
-        <button mat-button (click)="loadMore()" *ngIf="!isSearchLoading">
+        <button mat-button (click)="loadMore()" *ngIf="!isSearchLoading && !isEmptyList">
             {{'more' | uppercase}}
             <mat-icon aria-label="Load more results">expand_more</mat-icon>
         </button>

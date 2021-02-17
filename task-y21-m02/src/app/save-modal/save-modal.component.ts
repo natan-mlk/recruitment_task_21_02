@@ -54,4 +54,8 @@ export class SaveModalComponent implements OnInit {
         }
       )
   }
+
+  closeModal(){
+    this.dialogRef.close(false);
+  }
 }

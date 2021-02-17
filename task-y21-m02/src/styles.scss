@@ -17,3 +17,21 @@ body {
 * {
     box-sizing: border-box;
 }
+
+.save-dialog {
+    mat-dialog-container{
+        width: 100vw;
+
+        mat-form-field{
+            width: 100%;
+        }
+    }
+}
+
+@media (min-width: $desktopBreakpoint) {
+    .save-dialog {
+        mat-dialog-container{
+            width: 40vw;
+        }
+    }
+}

@@ -85,7 +85,8 @@ export class AppComponent implements OnInit {
     const dialogRef = this.dialog.open(SaveModalComponent, {
       width: 'auto',
       data: { playlist$: playlist },
-      panelClass: 'save-dialog'
+      panelClass: 'save-dialog',
+      disableClose: true
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -94,6 +95,13 @@ export class AppComponent implements OnInit {
       }
     });
   }
+
+  // const dialogRef = this.dialog.open(GalleryDialogComponent, {
+  //   width: 'auto',
+  //   data: {album: this.album, index: idx},
+  //   panelClass: 'gallery-dialog',
+  //   maxWidth: '90vw'
+  // });
 
   ngOnDestroy(): void {
     this.playlistSubsc.unsubscribe();
